@@ -3,7 +3,8 @@ package com.springReact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
+//To load data, create a CommandLineRunner implementation that uses the
+// repository to create new records in the database.
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
