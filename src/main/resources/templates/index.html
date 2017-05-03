@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React + Spring</title>
+</head>
+<body>
+    <div id='root'></div>
+
+    <script src="https://fb.me/react-15.0.1.js"></script>
+    <script src="https://fb.me/react-dom-15.0.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+
+</body>
+<!--Here you’ve created two—one for a table of employees and another for an employee entry.-->
+<!--Each component then needs a render function which describes the HTML to generate.-->
+
+
+<!--Here’s where the Babel compiler comes in to convert HTML code into the correct React statements. Note how the div tags are returned from the render statement.-->
+
+<!--You need to tell React to insert the parent component’s HTML into the root element. This is done using the ReactDOM.render method.-->
+<script type="text/babel">
+    var Employee = React.createClass({
+        render: function() {
+            return (<div>employee</div>);
+        }
+    });
+    var EmployeeTable = React.createClass({
+        render: function() {
+            return (<div>employee table</div>);
+        }
+    });
+
+    ReactDOM.render(
+            <EmployeeTable />, document.getElementById('root')
+    );
+
+</script>
+</html>
