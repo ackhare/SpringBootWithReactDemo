@@ -3,24 +3,26 @@
 <head>
     <title>React + Spring</title>
 </head>
-
 <body>
-<!--
-<Users>
-  <ShowAddButton />
-  <UserForm />
+<div id='root'></div>
 
-  <UsersList>
-    <User />
-  <UsersList />
-<Users />
--->
-<div id="app"></div>
 <script src="https://fb.me/react-15.0.1.js"></script>
 <script src="https://fb.me/react-dom-15.0.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-<script  type="text/babel" src="/public/main.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
 </body>
+
+
+<!--The root element is where React will insert our view HTML.
+The imports pull in three libraries—two for React itself and
+another to translate our view template using babel.-->
+
+
+<!--Here’s where the Babel compiler comes in to convert HTML code into the correct React statements. Note how the div tags are returned from the render statement.-->
+
+<!--You need to tell React to insert the parent component’s HTML into the root element. This is done using the ReactDOM.render method.-->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.min.js"></script>
 <script src="https://fb.me/react-dom-15.0.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
@@ -29,4 +31,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+<script type="text/babel" src="/public/app.js"></script>
 </html>
