@@ -1,7 +1,19 @@
 var Users = React.createClass({
 
+
+
     componentDidMount: function () {
         console.log("Inside component did mount of users ");
+var self=this;
+        $.ajax({
+            url: "http://localhost:8080/api/employees",
+        }).then(function (data) {
+            console.log("gsgsfgsgsfg");
+            console.log(data)
+            self.setState({ref: data._embedded.employees});
+        });
+
+
         var ref = this.props.employees;
         // ref.on('value', function(snap) {
         var items = [];
@@ -271,13 +283,13 @@ var UsersList = React.createClass({
 }
 
 });
-var EMPLOYEES = [
-    {name: 'Joe Biden', age: 45},
-    {name: 'President Obama', age: 54},
-    {name: 'Crystal Mac', age: 34},
-    {name: 'James Henry', age: 33}
-];
+// var EMPLOYEES = [
+//     {name: 'Joe Biden', age: 45},
+//     {name: 'President Obama', age: 54},
+//     {name: 'Crystal Mac', age: 34},
+//     {name: 'James Henry', age: 33}
+// ];
 
 ReactDOM.render(
-    <Users employees={EMPLOYEES}/>, document.getElementById('app')
+    <Users />, document.getElementById('app')
 );
