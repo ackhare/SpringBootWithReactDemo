@@ -42,6 +42,10 @@ var Users = React.createClass({
         newUser.key=newUser.name;
         ref.push(newUser);
         console.log("on new users");
+        this.setState({
+            formDisplayed: false
+
+        });
     },
 
     onRemoveUser: function(user) {
@@ -106,11 +110,13 @@ var UserForm = React.createClass({
     },
 
     render: function() {
+
         var display = this.props.displayed ? 'block': 'none';
         var styles = {
             display: display
         };
         return (
+
             <form style={styles} ref="userForm" id="userForm" onSubmit={this.handleForm}>
                 <div className="form-group">
                     <input type="text" ref="name" className="form-control" placeholder="Name"/>
