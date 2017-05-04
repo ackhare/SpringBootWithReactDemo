@@ -3,34 +3,31 @@ var Users = React.createClass({
 
 
     componentDidMount: function () {
+        var ref;
         console.log("Inside component did mount of users ");
 var self=this;
+        // ref.on('value', function(snap) {
+
+        var mode
+        var items = [];
+        var ref;
+        var self=this;
         $.ajax({
             url: "http://localhost:8080/api/employees",
         }).then(function (data) {
-            console.log("gsgsfgsgsfg");
-            console.log(data)
-            self.setState({ref: data._embedded.employees});
-        });
+            // console.log("gsgsfgsgsfg");
+            // console.log(data)
+            ref= data._embedded.employees;
+ self.setState({users: data._embedded.employees});
 
-
-        var ref = this.props.employees;
-        // ref.on('value', function(snap) {
-        var items = [];
-        var mode
-        console.log(this.props.employees);
-        ref.forEach(function (val) {
-
-            var item = val;
-            item.key = val.name;
-            items.push(item);
-        });
-
-        this.setState({
-            users: items
 
         });
-        // }.bind(this));
+        //
+        // this.setState({
+        //
+        //     users: ref
+        // });
+       // console.log(ref);
     },
 
     getInitialState: function () {
@@ -68,7 +65,9 @@ var self=this;
 
     render: function () {
         console.log("in render of users");
-        console.log(this.state.mode);
+        console.log(this.state.users);
+
+
 
         return (
             <div>
@@ -251,11 +250,23 @@ var UsersList = React.createClass({
 
 
     render: function () {
+        console.log("render of userList");
+        console.log(this.props.users);
+for (var key in this.props.users) {
+    console.log("fffffffffffffffffff");
+    console.log(this.props.users[key]);
+  }
+
         if(!this.props.displayed)
         { console.log("In user list");
         var users_set = this.props.users;
-
+            // this.props.users.forEach(function(val)
+            // {
+            //     console.log(val.name+"namea");
+            // });
         var userList = this.props.users.map(function (user) {
+            console.log("user");
+            console.log(user);
             return <User name={user.name} age={user.age} users_set={users_set}/>;
         });
 
