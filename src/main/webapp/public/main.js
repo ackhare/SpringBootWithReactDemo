@@ -1,45 +1,45 @@
-
 var Users = React.createClass({
 
-    componentDidMount: function() {
-         console.log("Inside component did mount of users ");
-        var ref =this.props.employees;
+    componentDidMount: function () {
+        console.log("Inside component did mount of users ");
+        var ref = this.props.employees;
         // ref.on('value', function(snap) {
-            var items = [];
-               console.log(this.props.employees);
-            ref.forEach(function(val) {
+        var items = [];
+        console.log(this.props.employees);
+        ref.forEach(function (val) {
 
-                var item = val;
-                item.key = val.name;
-                items.push(item);
-            });
+            var item = val;
+            item.key = val.name;
+            items.push(item);
+        });
 
-            this.setState({
-                users: items
+        this.setState({
+            users: items
 
-            });
+        });
         // }.bind(this));
     },
 
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             users: [],
             formDisplayed: false
         };
     },
 
-    onToggleForm: function() {
+    onToggleForm: function () {
         console.log('toggled');
         this.setState({
             formDisplayed: !this.state.formDisplayed
         });
     },
 
-    onNewUser: function(newUser) {
+
+    onNewUser: function (newUser) {
         console.log(newUser);
         console.log(this.state);
         var ref = this.state.users;
-        newUser.key=newUser.name;
+        newUser.key = newUser.name;
         ref.push(newUser);
         console.log("on new users");
         this.setState({
@@ -48,17 +48,18 @@ var Users = React.createClass({
         });
     },
 
-    onRemoveUser: function(user) {
+    onRemoveUser: function (user) {
 
     },
 
-    render: function() {
+    render: function () {
         console.log("in render of users");
         console.log(this.state.users);
+
         return (
             <div className="container">
-                <ShowAddButton displayed={this.state.formDisplayed} onToggleForm={this.onToggleForm} />
-                <UserForm  displayed={this.state.formDisplayed} onNewUser={this.onNewUser}/>
+                <ShowAddButton displayed={this.state.formDisplayed} onToggleForm={this.onToggleForm}/>
+                <UserForm displayed={this.state.formDisplayed} onNewUser={this.onNewUser}/>
                 <UsersList users={this.state.users}/>
             </div>
         );
@@ -67,18 +68,38 @@ var Users = React.createClass({
 
 
 var User = React.createClass({
-  render: function() {
-    return(
-      <li className="list-group-item">
-        <span>Name: {this.props.name}</span> <span>Age: {this.props.age}</span>
-      </li>
-      );
-  }
+    deleteUser: function () {
+        console.log(this.props.name);
+        var obj = {};
+        var name = this.props.name;
+        console.log(name);
+        var obj = this.props.users_set;
+        this.props.users_set.forEach(function (data, index) {
+
+            if (data.name == name) {
+                console.log(index);
+                obj.splice(index)
+            }
+        });
+        ReactDOM.render(
+            <Users employees={obj}/>, document.getElementById('app')
+        );
+    },
+    render: function () {
+
+        return (
+            <li className="list-group-item">
+                <span>Name: {this.props.name}</span> <span>Age: {this.props.age}</span><span><button name="Edit"
+                                                                                                     className="btn btn-primary"
+                                                                                                     onClick={this.deleteUser}>Delete</button> </span>
+            </li>
+        );
+    }
 });
 var ShowAddButton = React.createClass({
-    render: function() {
+    render: function () {
 
-        var classString, buttonText,button;
+        var classString, buttonText, button;
 
         if (this.props.displayed) {
             classString = 'btn btn-info btn-block';
@@ -95,23 +116,23 @@ var ShowAddButton = React.createClass({
 
 var UserForm = React.createClass({
 
-    handleForm: function(e) {
+    handleForm: function (e) {
         e.preventDefault();
         console.log(ReactDOM.findDOMNode(this.refs.name).value);
         var newUser = {
-            name:ReactDOM.findDOMNode(this.refs.name).value,
-            age:ReactDOM.findDOMNode(this.refs.age).value
+            name: ReactDOM.findDOMNode(this.refs.name).value,
+            age: ReactDOM.findDOMNode(this.refs.age).value
         };
-               ReactDOM.findDOMNode(this.refs.userForm).reset();
+        ReactDOM.findDOMNode(this.refs.userForm).reset();
         //this.refs.userForm.getDOMNode().reset();
 
         this.props.onNewUser(newUser);
 
     },
 
-    render: function() {
+    render: function () {
 
-        var display = this.props.displayed ? 'block': 'none';
+        var display = this.props.displayed ? 'block' : 'none';
         var styles = {
             display: display
         };
@@ -130,13 +151,13 @@ var UserForm = React.createClass({
 var UsersList = React.createClass({
 
 
-    render: function() {
-         console.log("In user list");
-          console.log(this.props.users);
+    render: function () {
+        console.log("In user list");
+        var users_set = this.props.users;
 
-            var userList = this.props.users.map(function(user) {
-              return <User name={user.name} age={user.age} />;
-            });
+        var userList = this.props.users.map(function (user) {
+            return <User name={user.name} age={user.age} users_set={users_set}/>;
+        });
         console.log(userList);
         return (
             <ul className="list-group">
@@ -151,6 +172,7 @@ var EMPLOYEES = [
     {name: 'Crystal Mac', age: 34},
     {name: 'James Henry', age: 33}
 ];
+
 ReactDOM.render(
-  <Users employees={EMPLOYEES}/>, document.getElementById('app')
+    <Users employees={EMPLOYEES}/>, document.getElementById('app')
 );
