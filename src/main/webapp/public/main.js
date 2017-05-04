@@ -2,12 +2,13 @@
 var Users = React.createClass({
 
     componentDidMount: function() {
+         console.log("Inside component did mount of users ");
         var ref =this.props.employees;
         // ref.on('value', function(snap) {
             var items = [];
                console.log(this.props.employees);
             ref.forEach(function(val) {
-                console.log(val);
+
                 var item = val;
                 item.key = val.name;
                 items.push(item);
@@ -15,6 +16,7 @@ var Users = React.createClass({
 
             this.setState({
                 users: items
+
             });
         // }.bind(this));
     },
@@ -27,6 +29,7 @@ var Users = React.createClass({
     },
 
     onToggleForm: function() {
+        console.log('toggled');
         this.setState({
             formDisplayed: !this.state.formDisplayed
         });
@@ -38,7 +41,7 @@ var Users = React.createClass({
         var ref = this.state.users;
         newUser.key=newUser.name;
         ref.push(newUser);
-        //console.log(ref);
+        console.log("on new users");
     },
 
     onRemoveUser: function(user) {
@@ -47,6 +50,7 @@ var Users = React.createClass({
 
     render: function() {
         console.log("in render of users");
+        console.log(this.state.users);
         return (
             <div className="container">
                 <ShowAddButton displayed={this.state.formDisplayed} onToggleForm={this.onToggleForm} />
@@ -62,7 +66,7 @@ var User = React.createClass({
   render: function() {
     return(
       <li className="list-group-item">
-        <span>{this.props.id}.</span> <span>Name: {this.props.name}</span> <span>Age: {this.props.age}</span>
+        <span>Name: {this.props.name}</span> <span>Age: {this.props.age}</span>
       </li>
       );
   }
@@ -122,11 +126,12 @@ var UsersList = React.createClass({
 
     render: function() {
          console.log("In user list");
-          console.log("mmmmm"+this.props.users);
+          console.log(this.props.users);
 
             var userList = this.props.users.map(function(user) {
-              return <User name={user.name} id={user.id} age={user.age} />;
+              return <User name={user.name} age={user.age} />;
             });
+        console.log(userList);
         return (
             <ul className="list-group">
                 {userList}
