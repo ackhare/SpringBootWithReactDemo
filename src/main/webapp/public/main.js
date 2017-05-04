@@ -59,9 +59,7 @@ var Users = React.createClass({
         console.log(this.state.mode);
 
         return (
-            <div className="container">
-                <h2>React with spring</h2>
-                <p>A simple CRUD application with spring boot and react</p>
+            <div>
                  <UserForm displayed={this.state.formDisplayed} mode_current={'create'} onNewUser={this.onNewUser}/>
                 <UsersList displayed={this.state.formDisplayed} users={this.state.users}/>
                 <ShowAddButton displayed={this.state.formDisplayed} onToggleForm={this.onToggleForm}/>
@@ -96,7 +94,6 @@ var User = React.createClass({
 
         console.log(obj);
         ReactDOM.render(
-
             <UserForm displayed={true} mode_current={'edit'} users_set={obj} user_to_edit={this.props}/>, document.getElementById('app')
         );
     },
@@ -184,7 +181,8 @@ var UserForm = React.createClass({
             console.log('editing complete');
             console.log(obj2);
             ReactDOM.render(
-                <UsersList users={obj2}/>, document.getElementById('app')
+                <Users employees={obj2}/>, document.getElementById('app')
+
             );
            // <UsersList users={this.state.users}/>
             console.log(existingUser);
