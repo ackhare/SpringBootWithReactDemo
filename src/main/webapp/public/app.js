@@ -20,9 +20,16 @@ var Employee = React.createClass({
             url: self.props.employee._links.self.href,
             type: 'DELETE',
             success: function (result) {
+                // This sets a display state which determines whether to render or not.
+                //     If the employee is deleted successfully, this variable is set to true.
+                // The handleDelete method sends a delete request to the server (using the href
+                // you got back from the get request). If successful, display
+                // is set to false and the render is updated. Otherwise,
+                // Toastr notifies the user that an error occurred.
                 self.setState({display: false});
             },
             error: function (xhr, ajaxOptions, thrownError) {
+                //<!--For that you can use Toastr which will allow you to show popups-->
                 toastr.error(xhr.responseJSON.message);
             }
         });
@@ -33,17 +40,12 @@ var Employee = React.createClass({
             url: self.props.employee._links.self.href,
             type: 'PUT',
             success: function (result) {
-                // This sets a display state which determines whether to render or not.
-                //     If the employee is deleted successfully, this variable is set to true.
-                // The handleDelete method sends a delete request to the server (using the href
-                // you got back from the get request). If successful, display
-                // is set to false and the render is updated. Otherwise,
-                // Toastr notifies the user that an error occurred.
+
 
                 self.setState({display: false});
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                //<!--For that you can use Toastr which will allow you to show popups-->
+
 
                 toastr.error(xhr.responseJSON.message);
             }
