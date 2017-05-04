@@ -5,6 +5,7 @@ var Users = React.createClass({
         var ref = this.props.employees;
         // ref.on('value', function(snap) {
         var items = [];
+        var mode
         console.log(this.props.employees);
         ref.forEach(function (val) {
 
@@ -23,7 +24,8 @@ var Users = React.createClass({
     getInitialState: function () {
         return {
             users: [],
-            formDisplayed: false
+            formDisplayed: false,
+            mode: 'create'
         };
     },
 
@@ -54,12 +56,12 @@ var Users = React.createClass({
 
     render: function () {
         console.log("in render of users");
-        console.log(this.state.users);
+        console.log(this.state.mode);
 
         return (
             <div className="container">
                 <ShowAddButton displayed={this.state.formDisplayed} onToggleForm={this.onToggleForm}/>
-                <UserForm displayed={this.state.formDisplayed} onNewUser={this.onNewUser}/>
+                <UserForm displayed={this.state.formDisplayed} mode_current={'create'} onNewUser={this.onNewUser}/>
                 <UsersList users={this.state.users}/>
             </div>
         );
@@ -72,7 +74,6 @@ var User = React.createClass({
         console.log(this.props.name);
         var obj = {};
         var name = this.props.name;
-        console.log(name);
         var obj = this.props.users_set;
         this.props.users_set.forEach(function (data, index) {
 
@@ -85,6 +86,17 @@ var User = React.createClass({
             <Users employees={obj}/>, document.getElementById('app')
         );
     },
+
+    editUser: function () {
+        console.log('edit user')
+        var obj = this.props.users_set;
+
+        console.log(obj);
+        ReactDOM.render(
+            <UserForm displayed={true} mode_current={'edit'} users_set={obj} user_to_edit={this.props}/>, document.getElementById('app')
+        );
+    },
+
     render: function () {
 
         return (
@@ -92,6 +104,9 @@ var User = React.createClass({
                 <span>Name: {this.props.name}</span> <span>Age: {this.props.age}</span><span><button name="Edit"
                                                                                                      className="btn btn-primary"
                                                                                                      onClick={this.deleteUser}>Delete</button> </span>
+                <span><button name="Edit"
+                              className="btn btn-primary"
+                              onClick={this.editUser}>Edit</button> </span>
             </li>
         );
     }
@@ -118,31 +133,86 @@ var UserForm = React.createClass({
 
     handleForm: function (e) {
         e.preventDefault();
-        console.log(ReactDOM.findDOMNode(this.refs.name).value);
-        var newUser = {
-            name: ReactDOM.findDOMNode(this.refs.name).value,
-            age: ReactDOM.findDOMNode(this.refs.age).value
-        };
-        ReactDOM.findDOMNode(this.refs.userForm).reset();
-        //this.refs.userForm.getDOMNode().reset();
+        console.log('user form');
+        if (this.props.mode_current == 'create') {
+            var newUser = {
+                name: ReactDOM.findDOMNode(this.refs.name).value,
+                age: ReactDOM.findDOMNode(this.refs.age).value
+            };
+            ReactDOM.findDOMNode(this.refs.userForm).reset();
+            //this.refs.userForm.getDOMNode().reset();
 
-        this.props.onNewUser(newUser);
+            this.props.onNewUser(newUser);
+        }
+        else if (this.props.mode_current == 'edit') {
+            console.log('handle edits');
+            var existingUser = {
+                name: ReactDOM.findDOMNode(this.refs.name).value,
+                age: ReactDOM.findDOMNode(this.refs.age).value,
+                key: ReactDOM.findDOMNode(this.refs.key).value,
+            };
+            console.log(existingUser);
+            var obj1=this.props.users_set;
+            var obj2=[];
+            console.log(this.props.users_set);
+            this.props.users_set.forEach(function (data, index) {
 
+                if (data.key == existingUser.key) {
+                    console.log("vdveveveveveveveve")
+                data.name=existingUser.name
+                    data.age=existingUser.age
+                obj2.push(data)
+                }
+                else
+                {
+                    obj2.push(data)
+                }
+            });
+            console.log('editing complete');
+            console.log(obj2);
+            ReactDOM.render(
+                <UsersList users={obj2}/>, document.getElementById('app')
+            );
+           // <UsersList users={this.state.users}/>
+            console.log(existingUser);
+
+        }
     },
 
     render: function () {
-
+        var mode_current;
         var display = this.props.displayed ? 'block' : 'none';
+
         var styles = {
             display: display
         };
+
+        if (this.props.mode_current == 'create') {
+            mode_current = "Create"
+        }
+        else {
+            mode_current = "Edit"
+        }
+        var current_mode = {
+
+            mode_current: mode_current
+        };
+        console.log(this.props);
+        var name_to_edit=null
+        var age_to_edit=null
+        if(this.props.user_to_edit) {
+
+             name_to_edit = this.props.user_to_edit.name
+             age_to_edit = this.props.user_to_edit.age
+        }
         return (
 
             <form style={styles} ref="userForm" id="userForm" onSubmit={this.handleForm}>
                 <div className="form-group">
-                    <input type="text" ref="name" className="form-control" placeholder="Name"/>
-                    <input type="number" ref="age" className="form-control" placeholder="Age"/>
-                    <button type="submit" className="btn btn-primary btn-block">Add user</button>
+                    <input type="text" ref="name" id="name" defaultValue={name_to_edit} className="form-control" />
+                    <input type="number" ref="age" id="age" defaultValue={age_to_edit} className="form-control" />
+                    <input type="hidden"  ref="key"  defaultValue={name_to_edit} className="form-control" />
+                    <button type="submit" className="btn btn-primary btn-block">{mode_current} user</button>
                 </div>
             </form>
         );
