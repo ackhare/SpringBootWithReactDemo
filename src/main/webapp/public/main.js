@@ -60,9 +60,12 @@ var Users = React.createClass({
 
         return (
             <div className="container">
+                <h2>React with spring</h2>
+                <p>A simple CRUD application with spring boot and react</p>
+                 <UserForm displayed={this.state.formDisplayed} mode_current={'create'} onNewUser={this.onNewUser}/>
+                <UsersList displayed={this.state.formDisplayed} users={this.state.users}/>
                 <ShowAddButton displayed={this.state.formDisplayed} onToggleForm={this.onToggleForm}/>
-                <UserForm displayed={this.state.formDisplayed} mode_current={'create'} onNewUser={this.onNewUser}/>
-                <UsersList users={this.state.users}/>
+
             </div>
         );
     }
@@ -93,6 +96,7 @@ var User = React.createClass({
 
         console.log(obj);
         ReactDOM.render(
+
             <UserForm displayed={true} mode_current={'edit'} users_set={obj} user_to_edit={this.props}/>, document.getElementById('app')
         );
     },
@@ -100,14 +104,22 @@ var User = React.createClass({
     render: function () {
 
         return (
-            <li className="list-group-item">
-                <span>Name: {this.props.name}</span> <span>Age: {this.props.age}</span><span><button name="Edit"
-                                                                                                     className="btn btn-primary"
-                                                                                                     onClick={this.deleteUser}>Delete</button> </span>
-                <span><button name="Edit"
-                              className="btn btn-primary"
-                              onClick={this.editUser}>Edit</button> </span>
-            </li>
+            // <li className="list-group-item">
+
+                <tr>
+                    <td>{this.props.name}</td>
+                    <td>{this.props.age}</td>
+
+                    <td>
+                              <button name="Edit" className="btn btn-primary" onClick={this.deleteUser}>Delete</button>
+                    </td>
+                    <td>
+                        <button name="Edit"
+                                className="btn btn-primary"
+                                onClick={this.editUser}>Edit</button>
+                    </td>
+                </tr>
+            // </li>
         );
     }
 });
@@ -117,15 +129,17 @@ var ShowAddButton = React.createClass({
         var classString, buttonText, button;
 
         if (this.props.displayed) {
-            classString = 'btn btn-info btn-block';
+            classString = 'btn btn-info ';
             button = 'Cancel';
         } else {
-            classString = 'btn btn-success btn-block';
+            classString = 'btn btn-success ';
             button = 'Create New User';
         }
         return (
+<div className="form-group">
             <button className={classString} onClick={this.props.onToggleForm}>{button}</button>
-        );
+</div>
+                );
     }
 });
 
@@ -158,7 +172,6 @@ var UserForm = React.createClass({
             this.props.users_set.forEach(function (data, index) {
 
                 if (data.key == existingUser.key) {
-                    console.log("vdveveveveveveveve")
                 data.name=existingUser.name
                     data.age=existingUser.age
                 obj2.push(data)
@@ -210,10 +223,16 @@ var UserForm = React.createClass({
             <form style={styles} ref="userForm" id="userForm" onSubmit={this.handleForm}>
                 <div className="form-group">
                     <input type="text" ref="name" id="name" defaultValue={name_to_edit} className="form-control" />
-                    <input type="number" ref="age" id="age" defaultValue={age_to_edit} className="form-control" />
-                    <input type="hidden"  ref="key"  defaultValue={name_to_edit} className="form-control" />
-                    <button type="submit" className="btn btn-primary btn-block">{mode_current} user</button>
                 </div>
+                <div className="form-group">
+
+                <input type="number" ref="age" id="age" defaultValue={age_to_edit} className="form-control" />
+                </div>
+
+                    <input type="hidden"  ref="key"  defaultValue={name_to_edit} className="form-control" />
+                <div className="form-group">
+                    <button type="submit" className="btn btn-primary">{mode_current} user</button>
+            </div>
             </form>
         );
     }
@@ -222,19 +241,37 @@ var UsersList = React.createClass({
 
 
     render: function () {
-        console.log("In user list");
+        if(!this.props.displayed)
+        { console.log("In user list");
         var users_set = this.props.users;
 
         var userList = this.props.users.map(function (user) {
             return <User name={user.name} age={user.age} users_set={users_set}/>;
         });
-        console.log(userList);
+
         return (
-            <ul className="list-group">
-                {userList}
-            </ul>
+
+            <table className="table table-striped">
+
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>{userList}</tbody>
+            </table>
+
+
         );
-    }
+    }else
+        {
+            return null;
+        }
+}
+
 });
 var EMPLOYEES = [
     {name: 'Joe Biden', age: 45},
