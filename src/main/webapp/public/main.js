@@ -40,7 +40,7 @@ var Users = React.createClass({
     },
 
 
-    onNewUser: function (newUser) {
+    onNewUser: function (newUser,ref_form) {
         var self = this;
         $.ajax({
             url: "http://localhost:8080/api/employees",
@@ -57,10 +57,11 @@ var Users = React.createClass({
                     self.setState({formDisplayed: false})
                     self.setState({users: data._embedded.employees});
                     console.log("Inside onNewUser");
-
+                    ReactDOM.findDOMNode(ref_form).reset();
                 });
             }
         })
+
 
 
     },
@@ -192,10 +193,10 @@ var UserForm = React.createClass({
                 name: ReactDOM.findDOMNode(this.refs.name).value,
                 age: ReactDOM.findDOMNode(this.refs.age).value
             };
-            ReactDOM.findDOMNode(this.refs.userForm).reset();
+
             //this.refs.userForm.getDOMNode().reset();
 
-            this.props.onNewUser(newUser);
+            this.props.onNewUser(newUser,this.refs.userForm);
         }
         else if (this.props.mode_current == 'edit') {
             var existingUser = {
