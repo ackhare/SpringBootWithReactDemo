@@ -65,30 +65,6 @@ var Users = React.createClass({
 
 
     },
-    onEditing: function () {
-        var self = this;
-        $.ajax({
-            url: "http://localhost:8080/api/employees",
-            type: "POST",
-            data: JSON.stringify({name: newUser.name, age: newUser.age}),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function () {
-                console.log("success on newUsers");
-                $.ajax({
-                    url: "http://localhost:8080/api/employees",
-                }).then(function (data) {
-                    console.log(data)
-                    self.setState({formDisplayed: false})
-                    self.setState({users: data._embedded.employees});
-                    console.log("Inside onNewUser");
-
-                });
-            }
-        })
-
-
-    },
     onRemoveUser: function (user) {
 
     },
