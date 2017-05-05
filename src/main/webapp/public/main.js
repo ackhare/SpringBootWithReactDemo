@@ -1,4 +1,5 @@
 var Users = React.createClass({
+
     componentWillReceiveProps: function () {
         console.log("run be");
         var self = this;
@@ -63,7 +64,30 @@ var Users = React.createClass({
 
 
     },
+    onEditing: function () {
+        var self = this;
+        $.ajax({
+            url: "http://localhost:8080/api/employees",
+            type: "POST",
+            data: JSON.stringify({name: newUser.name, age: newUser.age}),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function () {
+                console.log("success on newUsers");
+                $.ajax({
+                    url: "http://localhost:8080/api/employees",
+                }).then(function (data) {
+                    console.log(data)
+                    self.setState({formDisplayed: false})
+                    self.setState({users: data._embedded.employees});
+                    console.log("Inside onNewUser");
 
+                });
+            }
+        })
+
+
+    },
     onRemoveUser: function (user) {
 
     },
@@ -71,7 +95,7 @@ var Users = React.createClass({
     render: function () {
         return (
             <div>
-                <UserForm displayed={this.state.formDisplayed} mode_current={'create'} onNewUser={this.onNewUser}/>
+                <UserForm displayed={this.state.formDisplayed} mode_current={'create'} onEditing={this.onEditing} onNewUser={this.onNewUser}/>
                 <UsersList displayed={this.state.formDisplayed} users={this.state.users}/>
                 <ShowAddButton displayed={this.state.formDisplayed} onToggleForm={this.onToggleForm}/>
 
@@ -126,7 +150,7 @@ var User = React.createClass({
                 <td>{this.props.age}</td>
 
                 <td>
-                    <button name="Edit" className="btn btn-primary" onClick={this.deleteUser}>Delete</button>
+                    <button  className="btn btn-primary" onClick={this.deleteUser}>Delete</button>
                 </td>
                 <td>
                     <button name="Edit"
@@ -188,14 +212,15 @@ var UserForm = React.createClass({
                 dataType: "json",
                 success: function () {
                     console.log("success in editing");
+
+                    ReactDOM.render(
+                        <Users fromAjax={true}/>, document.getElementById('app')
+                    );
                 }
             })
 
             console.log('editing complete');
 
-            ReactDOM.render(
-                <Users fromAjax={true}/>, document.getElementById('app')
-            );
 
         }
     },
