@@ -95,7 +95,7 @@ var Users = React.createClass({
     render: function () {
         return (
             <div>
-                <UserForm displayed={this.state.formDisplayed} mode_current={'create'} onEditing={this.onEditing} onNewUser={this.onNewUser}/>
+                <UserForm displayed={this.state.formDisplayed} mode_current={'create'}  onNewUser={this.onNewUser}/>
                 <UsersList displayed={this.state.formDisplayed} users={this.state.users}/>
                 <ShowAddButton displayed={this.state.formDisplayed} onToggleForm={this.onToggleForm}/>
 
