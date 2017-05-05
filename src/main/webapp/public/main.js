@@ -17,7 +17,7 @@ var Users = React.createClass({
         $.ajax({
             url: "http://localhost:8080/api/employees",
         }).then(function (data) {
-            console.log("success in editing");
+            console.log("success in editing  in component did mount of users");
             self.setState({users: data._embedded.employees});
 
         });
@@ -26,7 +26,6 @@ var Users = React.createClass({
     getInitialState: function () {
         return {
             users: [],
-            links: '',
             formDisplayed: false,
             mode: 'create'
         };
@@ -54,7 +53,8 @@ var Users = React.createClass({
                     url: "http://localhost:8080/api/employees",
                 }).then(function (data) {
                     console.log(data)
-                    self.setState({users: data._embedded.employees, formDisplayed: false});
+                    self.setState({formDisplayed: false})
+                    self.setState({users: data._embedded.employees});
                     console.log("Inside onNewUser");
 
                 });
@@ -109,10 +109,12 @@ var User = React.createClass({
 
     editUser: function () {
         var obj = this.props.users_set;
+
         ReactDOM.render(
             <UserForm displayed={true} mode_current={'edit'} users_set={obj} links={this.props.link}
                       user_to_edit={this.props}/>, document.getElementById('app')
         );
+
     },
 
     render: function () {
@@ -177,6 +179,7 @@ var UserForm = React.createClass({
                 age: ReactDOM.findDOMNode(this.refs.age).value,
                 key: ReactDOM.findDOMNode(this.refs.key).value,
             };
+            console.log("Inside editing");
             $.ajax({
                 url: this.props.links,
                 type: "PUT",
@@ -189,6 +192,7 @@ var UserForm = React.createClass({
             })
 
             console.log('editing complete');
+
             ReactDOM.render(
                 <Users fromAjax={true}/>, document.getElementById('app')
             );
