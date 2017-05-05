@@ -18,9 +18,9 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         System.out.println("bootstaping data");
-        this.repository.save(new Employee("Joe Biden", 45, 5));
-        this.repository.save(new Employee("President Obama", 54, 8));
-        this.repository.save(new Employee("Crystal Mac", 34, 12));
-        this.repository.save(new Employee("James Henry", 33, 2));
+        this.repository.save(new Employee("Joe Biden", 45));
+        this.repository.save(new Employee("President Obama", 54));
+        this.repository.save(new Employee("Crystal Mac", 34));
+        this.repository.save(new Employee("James Henry", 33));
     }
 }
