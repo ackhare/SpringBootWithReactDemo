@@ -16,6 +16,7 @@ var Employee = React.createClass({
     },
     handleDelete() {
         var self = this;
+        console.log(self.props.employee._links.self.href);
         $.ajax({
             url: self.props.employee._links.self.href,
             type: 'DELETE',
@@ -34,23 +35,7 @@ var Employee = React.createClass({
             }
         });
     },
-    handleDelete() {
-        var self = this;
-        $.ajax({
-            url: self.props.employee._links.self.href,
-            type: 'PUT',
-            success: function (result) {
 
-
-                self.setState({display: false});
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-
-
-                toastr.error(xhr.responseJSON.message);
-            }
-        });
-    },
     render: function () {
         //     Try deleting an entry and refreshing the page. It should stay deleted.
         //
