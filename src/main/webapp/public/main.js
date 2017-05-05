@@ -11,7 +11,6 @@ var Users = React.createClass({
     },
 
     componentDidMount: function () {
-
         var self = this;
         $.ajax({
             url: "http://localhost:8080/api/employees",
