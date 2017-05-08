@@ -1,3 +1,5 @@
+import com.moowork.gradle.node.task.NodeTask
+
 buildscript {
     repositories {
         mavenCentral()
@@ -17,7 +19,19 @@ apply plugin: 'java'
 //apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
 
+  dependencies {
+    classpath "com.moowork.gradle:gradle-node-plugin:1.1.1"
+  }
+}
+
+apply plugin: 'com.moowork.node'
 jar {
     baseName = 'gs-spring-boot'
     version = '0.1.0'
@@ -28,6 +42,9 @@ repositories {
 }
 bootRun {
     addResources = true
+}
+task webpack(type: NodeTask, dependsOn: 'npmInstall') {
+    script = project.file('node_modules/.bin/webpack')
 }
 dependencies {
     compile "org.springframework.boot:spring-boot-starter-thymeleaf:+"
@@ -41,3 +58,4 @@ dependencies {
 compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
     //compile group: 'com.h2database', name: 'h2', version: '1.4.195'
 }
+processResources.dependsOn 'webpack'
