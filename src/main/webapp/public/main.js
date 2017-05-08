@@ -1,6 +1,15 @@
-var Users = React.createClass({
+'use strict';
 
-    componentWillReceiveProps: function () {
+class Users extends React.Component {
+    constructor() {
+        super();
+        this.state = {users: [], formDisplayed: false, mode: 'create'};
+        this.onNewUser = this.onNewUser.bind(this);
+        this.onToggleForm = this.onToggleForm.bind(this);
+
+    }
+
+    componentWillReceiveProps() {
         console.log("run be");
         var self = this;
         $.ajax({
@@ -8,9 +17,9 @@ var Users = React.createClass({
         }).then(function (data) {
             self.setState({users: data._embedded.employees});
         });
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         var ref;
         console.log("Inside component did mount of users ");
         var self = this;
@@ -22,25 +31,18 @@ var Users = React.createClass({
             self.setState({users: data._embedded.employees});
 
         });
-    },
+    }
 
-    getInitialState: function () {
-        return {
-            users: [],
-            formDisplayed: false,
-            mode: 'create'
-        };
-    },
 
-    onToggleForm: function () {
+    onToggleForm() {
         console.log('toggled');
         this.setState({
             formDisplayed: !this.state.formDisplayed
         });
-    },
+    }
 
 
-    onNewUser: function (newUser,ref_form) {
+    onNewUser(newUser, ref_form) {
         var self = this;
         $.ajax({
             url: "http://localhost:8080/api/employees",
@@ -63,27 +65,34 @@ var Users = React.createClass({
         })
 
 
+    }
 
-    },
-    onRemoveUser: function (user) {
+    onRemoveUser(user) {
 
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             <div>
-                <UserForm displayed={this.state.formDisplayed} mode_current={'create'}  onNewUser={this.onNewUser}/>
+                <UserForm displayed={this.state.formDisplayed} mode_current={'create'} onNewUser={this.onNewUser}/>
                 <UsersList displayed={this.state.formDisplayed} users={this.state.users}/>
                 <ShowAddButton displayed={this.state.formDisplayed} onToggleForm={this.onToggleForm}/>
 
             </div>
         );
     }
-});
+}
 
 
-var User = React.createClass({
-    deleteUser: function () {
+class User extends React.Component {
+    constructor() {
+        super();
+        this.deleteUser = this.deleteUser.bind(this);
+        this.editUser = this.editUser.bind(this);
+    }
+
+
+    deleteUser() {
         var self = this;
         $.ajax({
             url: self.props.link,
@@ -106,9 +115,9 @@ var User = React.createClass({
         });
 
 
-    },
+    }
 
-    editUser: function () {
+    editUser() {
         var obj = this.props.users_set;
 
         ReactDOM.render(
@@ -116,9 +125,9 @@ var User = React.createClass({
                       user_to_edit={this.props}/>, document.getElementById('app')
         );
 
-    },
+    }
 
-    render: function () {
+    render() {
         return (
             // <li className="list-group-item">
 
@@ -127,7 +136,7 @@ var User = React.createClass({
                 <td>{this.props.age}</td>
 
                 <td>
-                    <button  className="btn btn-primary" onClick={this.deleteUser}>Delete</button>
+                    <button className="btn btn-primary" onClick={this.deleteUser}>Delete</button>
                 </td>
                 <td>
                     <button name="Edit"
@@ -139,9 +148,9 @@ var User = React.createClass({
             // </li>
         );
     }
-});
-var ShowAddButton = React.createClass({
-    render: function () {
+}
+class ShowAddButton extends React.Component {
+    render() {
 
         var classString, buttonText, button;
 
@@ -158,11 +167,17 @@ var ShowAddButton = React.createClass({
             </div>
         );
     }
-});
+}
 
-var UserForm = React.createClass({
+class UserForm extends React.Component {
+    constructor() {
+        super();
+        //this.state = {users: [], formDisplayed: false, mode: 'create'};
+        this.handleForm = this.handleForm.bind(this);
 
-    handleForm: function (e) {
+    }
+
+    handleForm(e) {
         e.preventDefault();
         if (this.props.mode_current == 'create') {
             var newUser = {
@@ -172,7 +187,7 @@ var UserForm = React.createClass({
 
             //this.refs.userForm.getDOMNode().reset();
 
-            this.props.onNewUser(newUser,this.refs.userForm);
+            this.props.onNewUser(newUser, this.refs.userForm);
         }
         else if (this.props.mode_current == 'edit') {
             var existingUser = {
@@ -200,9 +215,9 @@ var UserForm = React.createClass({
 
 
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var mode_current;
         var display = this.props.displayed ? 'block' : 'none';
 
@@ -245,9 +260,9 @@ var UserForm = React.createClass({
             </form>
         );
     }
-});
-var UsersList = React.createClass({
-    render: function () {
+}
+class UsersList extends React.Component {
+    render() {
         if (!this.props.displayed) {
             console.log("In user list");
             var users_set = this.props.users;
@@ -277,7 +292,7 @@ var UsersList = React.createClass({
         }
     }
 
-});
+}
 
 
 ReactDOM.render(
