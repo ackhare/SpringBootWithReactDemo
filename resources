@@ -19,3 +19,8 @@ class ExampleComponent extends BaseComponent {
 
 
  https://github.com/selecafs/react-webpack-springboot
+
+
+
+
+ gradle bootRun

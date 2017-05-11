@@ -6,17 +6,17 @@ import org.springframework.stereotype.Component;
 //To load data, create a CommandLineRunner implementation that uses the
 // repository to create new records in the database.
 @Component
-public class DatabaseLoader implements CommandLineRunner {
+class DatabaseLoader implements CommandLineRunner {
 
     private final EmployeeRepository repository;
 
     @Autowired
-    public DatabaseLoader(EmployeeRepository repository) {
+     DatabaseLoader(EmployeeRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public void run(String... strings) throws Exception {
+    void run(String... strings) throws Exception {
         System.out.println("bootstaping data");
         this.repository.save(new Employee("Joe Biden", 45));
         this.repository.save(new Employee("President Obama", 54));
