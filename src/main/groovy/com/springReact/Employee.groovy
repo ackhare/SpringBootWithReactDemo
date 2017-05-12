@@ -1,7 +1,8 @@
 package com.springReact
 
-//import lombok.Data;
-
+/**
+ * Created by chetan on 12/5/17.
+ */
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,33 +10,19 @@ import javax.persistence.Id;
 @Entity
 class Employee implements Serializable {
 
-	private @Id @GeneratedValue Long id;
-	private String name;
-	private int age;
-	//private int years;
+    @Id
+    @GeneratedValue
+    Long id;
+    String name;
+    int age;
 
 
-	Employee() {}
 
-	Employee(String name, int age) {
-		this.name = name;
-		this.age = age;
-		//this.years = years;
-	}
+    Employee() {}
 
-	String getName() {
-		return name
-	}
-
-	void setName(String name) {
-		this.name = name
-	}
-
-	int getAge() {
-		return age
-	}
-
-	void setAge(int age) {
-		this.age = age
-	}
+    Employee(String name, int age) {
+        this.name = name;
+        this.age = age;
+        //this.years = years;
+    }
 }

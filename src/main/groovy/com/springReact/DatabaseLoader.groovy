@@ -1,10 +1,12 @@
-package com.springReact;
+package com.springReact
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
-//To load data, create a CommandLineRunner implementation that uses the
-// repository to create new records in the database.
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.CommandLineRunner
+import org.springframework.stereotype.Component
+
+/**
+ * Created by chetan on 12/5/17.
+ */
 @Component
 class DatabaseLoader implements CommandLineRunner {
 
