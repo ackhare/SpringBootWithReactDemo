@@ -1,18 +1,18 @@
 package com.springReact
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
+
 /**
  * Created by chetan on 12/5/17.
  */
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-@Entity
-class Employee implements Serializable {
+@Document
+class Employee{
 
     @Id
-    @GeneratedValue
-    Long id;
+   // @GeneratedValue
+    String id;
     String name;
     int age;
 

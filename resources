@@ -20,7 +20,9 @@ class ExampleComponent extends BaseComponent {
 
  https://github.com/selecafs/react-webpack-springboot
 
-
+systemctl start mongod
+systemctl enable mongod
+netstat -plntu
 
 
  gradle bootRun
@@ -29,3 +31,10 @@ class ExampleComponent extends BaseComponent {
  for mongodb
 
  https://www.howtoforge.com/tutorial/install-mongodb-on-ubuntu-16.04/
+
+ show dbs
+
+ gradle dependencies --configuration runtime
+
+  db.employee.insert({"name":"John","age":12})
+db.employee.find()

@@ -48,6 +48,7 @@ task webpack(type: NodeTask, dependsOn: 'npmInstall') {
     script = project.file('node_modules/.bin/webpack')
 }
 dependencies {
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
     compile "org.springframework.boot:spring-boot-starter-thymeleaf:+"
 //    compile "org.springframework.boot:spring-boot-starter-data-jpa:+"
     compile "org.springframework.boot:spring-boot-starter-data-rest:+"
@@ -55,11 +56,12 @@ dependencies {
     compile 'ch.qos.logback:logback-core:1.1.5'
     compile "org.springframework.boot:spring-boot-starter-test:+"
     compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.1.RELEASE'
+    //compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.1.RELEASE'
     compile("org.springframework.boot:spring-boot-devtools:+")
    // compile("org.projectlombok:lombok:1.16.10")
     compile 'org.codehaus.groovy:groovy-all:2.4.10'
-compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
+
+//compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
     //compile group: 'com.h2database', name: 'h2', version: '1.4.195'
 }
 processResources.dependsOn 'webpack'
