@@ -1,5 +1,6 @@
 package com.springReact
 
+import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
@@ -8,14 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document
  */
 
 @Document
-class Employee{
+class Employee {
 
     @Id
-   // @GeneratedValue
-    String id;
+    // @GeneratedValue
+    BigInteger id;
     String name;
     int age;
-
 
 
     Employee() {}
