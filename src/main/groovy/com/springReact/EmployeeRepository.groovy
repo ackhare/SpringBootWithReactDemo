@@ -7,7 +7,7 @@ package com.springReact
 import org.springframework.data.repository.CrudRepository;
 //import org.springframework.security.access.prepost.PreAuthorize;
 
-interface EmployeeRepository extends CrudRepository<Employee,BigInteger> {
+interface EmployeeRepository extends CrudRepository<Employee,String> {
 
 
 

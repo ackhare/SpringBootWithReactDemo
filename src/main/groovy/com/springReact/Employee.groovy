@@ -13,7 +13,7 @@ class Employee {
 
     @Id
     // @GeneratedValue
-    BigInteger id;
+    String id;
     String name;
     int age;
 
