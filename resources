@@ -38,3 +38,6 @@ netstat -plntu
 
   db.employee.insert({"name":"John","age":12})
 db.employee.find()
+
+
+http://stackoverflow.com/questions/25263176/many-to-many-in-mongodb-using-spring-configurationannotation-preffered

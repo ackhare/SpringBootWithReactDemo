@@ -1,4 +1,4 @@
-package com.springReact
+package com.springReact.model
 
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id

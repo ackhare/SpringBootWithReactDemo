@@ -1,4 +1,6 @@
-package com.springReact
+package com.springReact.repository
+
+import com.springReact.model.Employee
 
 /**
  * Created by chetan on 12/5/17.

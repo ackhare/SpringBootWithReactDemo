@@ -1,4 +1,4 @@
-package com.springReact
+package com.springReact.config
 
 import com.mongodb.Mongo
 import org.springframework.context.annotation.Bean

@@ -1,8 +1,9 @@
+package com.springReact.config
 //package com.springReact
 
 
-import com.springReact.Employee
-import com.springReact.EmployeeRepository
+import com.springReact.model.Employee
+import com.springReact.repository.EmployeeRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.data.mongodb.core.MongoOperations
