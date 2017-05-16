@@ -32,15 +32,18 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
-     @DBRef
-     private Set<User> users;
-
-    // @ManyToMany(mappedBy = "roles")
-    public Set<User> getUsers() {
-        return users;
+//     @DBRef
+//     private Set<User> users;
+    Role(String name) {
+        this.name = name
     }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//
+//    // @ManyToMany(mappedBy = "roles")
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 }

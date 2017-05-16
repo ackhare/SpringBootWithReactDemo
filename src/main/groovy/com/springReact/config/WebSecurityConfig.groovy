@@ -1,4 +1,7 @@
 package com.springReact.config
+
+import com.springReact.service.UserDetailsServiceImpl
+
 ////package com.springReact
 ////
 /////**
@@ -14,39 +17,37 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan("com.springReact.service")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-   // @Qualifier("userDetailsService")
-    private UserDetailsService userDetailsService;
-
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    private UserDetailsServiceImpl userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                    .antMatchers("/resources/**", "/registration").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
-                    .and()
-                .logout()
-                    .permitAll();
+		http
+		.authorizeRequests()
+			.antMatchers("/public/**").permitAll()
+			.anyRequest().authenticated()
+			.and()
+		.formLogin()
+			.defaultSuccessUrl("/", true)
+			.permitAll()
+			.and()
+		.httpBasic()
+			.and()
+		.csrf().disable()
+		.logout()
+			.logoutSuccessUrl("/");
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
+
 }

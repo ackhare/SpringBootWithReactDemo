@@ -16,8 +16,16 @@ public class User {
     private String username;
     private String password;
     private String passwordConfirm;
+
+    Role getRole() {
+        return role
+    }
+
+    void setRole(Role role) {
+        this.role = role
+    }
     @DBRef
-    private Set<Role> roles;
+    private Role role;
 
 
     //@GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,13 +62,10 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    //@ManyToMany
-    //@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    User(String username, String password, String passwordConfirm, Role role) {
+        this.username = username
+        this.password = password
+        this.passwordConfirm = passwordConfirm
+        this.role = role
     }
 }

@@ -12,15 +12,4 @@ import org.springframework.data.repository.CrudRepository;
 interface EmployeeRepository extends CrudRepository<Employee,String> {
 
 
-
-   // void delete(Long aLong);
-//
-//
-//    List<Employee> findAll();
-//
-//    Employee findOne(Long id);
-//
-//    Employee save(Employee persisted);
-//    Employee saveAndFlush(Employee persisted);
-
 }

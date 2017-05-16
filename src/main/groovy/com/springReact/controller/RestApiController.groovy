@@ -9,13 +9,13 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by chetan on 13/5/17.
  */
-@RepositoryRestController
-class RestApiController {
-    //  private final ScannerRepository repository;
-    @Autowired
-    EmployeeRepository repository
-
-    private final Logger logger = LoggerFactory.getLogger(RestApiController.class);
+//@RepositoryRestController
+//class RestApiController {
+//    //  private final ScannerRepository repository;
+//    @Autowired
+//    EmployeeRepository repository
+//
+//    private final Logger logger = LoggerFactory.getLogger(RestApiController.class);
 
 //    @RequestMapping(method = RequestMethod.GET)
 //    public @ResponseBody ResponseEntity<?> getProducers() {
@@ -52,4 +52,4 @@ class RestApiController {
 //    }
 
 
-}
+//}
