@@ -29,7 +29,7 @@ export class LoginPage extends React.Component {
                     <label >Password</label>:
                     <div className="form-group">
                     <input type="password" id="password" name="password" /> </div>
-                    <input type="submit"  className="btn btn-default" value="Log in" />
+                    <input type="submit"  className="btn btn-success" value="Log in" />
                 </form>
 
         );

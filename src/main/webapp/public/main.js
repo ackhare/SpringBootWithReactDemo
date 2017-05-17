@@ -1,4 +1,3 @@
-
 'use strict';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -8,7 +7,7 @@ import LogoutPage from './components/LogoutPage';
 class App extends React.Component {
     constructor() {
         super();
-        this.state = {authenticatedUser: "",authorities:""};
+        this.state = {authenticatedUser: "", authorities: ""};
         // this.editUser = this.editUser.bind(this);
     }
 
@@ -23,7 +22,7 @@ class App extends React.Component {
         }).then(function (data) {
             console.log("success in editing  in component did mount of users");
             console.log(data.authorities[0].authority);
-            self.setState({authenticatedUser: data.username,authorities:data.authorities[0].authority});
+            self.setState({authenticatedUser: data.username, authorities: data.authorities[0].authority});
 
         });
     }
@@ -36,15 +35,16 @@ class App extends React.Component {
                     <div className="col-md-12">
                         <div className="col-md-6">
 
-                        <p className="label label-info">The user login is {this.state.authenticatedUser} with role {this.state.authorities}</p>
-</div>
-                        <div className="col-md-6">
 
+                        </div>
+                        <div className="col-md-6  col-md-offset-10">
+                            <p className="label label-info">Welcome {this.state.authenticatedUser} with
+                                role {this.state.authorities}</p>
                             <LogoutPage />
                         </div>
 
-</div>
-                      <Users/>
+                    </div>
+                    <Users/>
                 </div>
             );
         }
@@ -53,7 +53,7 @@ class App extends React.Component {
                 // <li className="list-group-item">
                 // <div>
 
-                    <LoginPage />
+                <LoginPage />
                 // </div>
             );
         }

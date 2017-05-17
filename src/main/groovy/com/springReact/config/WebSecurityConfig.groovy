@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.inMemoryAuthentication()
-				.withUser("user").password("password").roles("USER");
+				.withUser("regadmin").password("password").roles("USER");
 	}
 //    @Autowired
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
