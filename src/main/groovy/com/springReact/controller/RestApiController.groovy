@@ -32,7 +32,7 @@ class RestApiController {
     @RequestMapping(method = RequestMethod.GET)
     public def isLogin() {
         println "zzzzzzzzzzzzzzzzzzzzzzzz"
-        UsernamePasswordAuthenticationToken authentication = SecurityContextHolder.getContext().getAuthentication();
+        def authentication = SecurityContextHolder.getContext().getAuthentication();
         println authentication?.principal;
         return       authentication?.principal;
 

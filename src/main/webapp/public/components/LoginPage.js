@@ -14,7 +14,7 @@ import UserForm from './UserForm'
 export class LoginPage extends React.Component {
     constructor() {
         super();
-        this.state = {users: [], formDisplayed: false, mode: 'create'};
+        //this.state = {users: [], formDisplayed: false, mode: 'create'};
 
 
     }
@@ -22,14 +22,14 @@ export class LoginPage extends React.Component {
 
     render() {
         return (
-            <div>
-   <form name='f' action='/login' method='POST'>
-    User:<input type='text' name='username' /><br/>
-       Password:<input type='password' name='password'/>
-   <input name="submit" type="submit" value="Login"/>
+                <form action="/login" method="post">
+                    <label >Username</label>:
+                    <input type="text" id="username" name="username"/> <br />
+                    <label >Password</label>:
+                    <input type="password" id="password" name="password" /> <br />
+                    <input type="submit" value="Log in" />
+                </form>
 
-</form>
-            </div>
         );
     }
 }
