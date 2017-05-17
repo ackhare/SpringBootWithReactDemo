@@ -21,18 +21,30 @@ class App extends React.Component {
         }).then(function (data) {
             console.log("success in editing  in component did mount of users");
             console.log(data);
-            //self.setState({users: data._embedded.employees});
+            self.setState({authenticatedUser: data.username});
 
         });
     }
 
     render() {
-        return (
-            // <li className="list-group-item">
-            <div>
-                <LoginPage displayed={this.state.formDisplayed}/>
-            </div>
-        );
+        console.log("authenticatedUser");
+        if(this.state.authenticatedUser)
+        {
+                        return (
+                // <li className="list-group-item">
+                <div>
+                 <Users/>
+                </div>
+            );
+        }
+        else {
+            return (
+                // <li className="list-group-item">
+                <div>
+                    {/*<LoginPage displayed={this.state.formDisplayed}/>*/}
+                </div>
+            );
+        }
     }
 }
 ReactDOM.render(
