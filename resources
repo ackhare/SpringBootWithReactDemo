@@ -39,5 +39,5 @@ netstat -plntu
   db.employee.insert({"name":"John","age":12})
 db.employee.find()
 
-
+db.user.remove({});
 http://stackoverflow.com/questions/25263176/many-to-many-in-mongodb-using-spring-configurationannotation-preffered
