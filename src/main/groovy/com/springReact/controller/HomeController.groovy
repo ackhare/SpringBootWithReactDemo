@@ -63,14 +63,14 @@ class HomeController {
 //        return "user/index";
 //    }
 
-    @RequestMapping("/login")
-    public String login() {
-        return "index";
-    }
-
-    @RequestMapping("/login-error")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "index";
-    }
+//    @RequestMapping("/login")
+//    public String login() {
+//        return "index";
+//    }
+//
+//    @RequestMapping("/login-error")
+//    public String loginError(Model model) {
+//        model.addAttribute("loginError", true);
+//        return "index";
+//    }
 }

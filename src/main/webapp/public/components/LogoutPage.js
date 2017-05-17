@@ -12,15 +12,36 @@ import UserForm from './UserForm'
 export class LogoutPage extends React.Component {
     constructor() {
         super();
+        this.logout = this.logout.bind(this);
     }
+    logout() {
+        var data = 'username=' + 'user' + '&password=' + 'password';
+        $.ajax({
+            url: "http://localhost:8080/logout",
+            type: "POST",
+            data: "",
+            success: function (data,textStatus,jqXHR ) {
+                //self.setState({isLogin:true});
 
+                console.log("success on logout");
+
+            },
+            error: function () {
+               // self.setState({loginError:"some issue occurred"});
+
+                console.log("error on logout");
+
+            }
+        })
+
+    }
 
     render() {
         return (
 
-            <div class="form-group">
-                <form action="/logout"  method="post">
-                    <input  className="btn btn-danger" type="submit" value="Logout" />
+            <div className="form-group">
+                <form >
+                    <button  className="btn btn-danger" onClick={this.logout} value="Logout" >LogOut</button>
                 </form>
             </div>
 
