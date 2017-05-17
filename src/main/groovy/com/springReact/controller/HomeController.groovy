@@ -54,13 +54,9 @@ class HomeController {
 
     @RequestMapping("/")
     public String root() {
-        return "redirect:/index";
-    }
-
-    @RequestMapping("/index")
-    public String index() {
         return "index";
     }
+
 
 //    @RequestMapping("/user/index")
 //    public String userIndex() {
