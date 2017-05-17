@@ -35,10 +35,10 @@ class DatabaseLoader implements CommandLineRunner {
     @Override
     void run(String... strings) throws Exception {
         System.out.println("bootstaping data");
-        Role role1= new Role("user_role");
-        roleRepository.save(role1);
-        User user1= new User("regadmin","password","password",role1)
-        userRepository.save(user1);
+//        Role role1= new Role("user_role");
+//        roleRepository.save(role1);
+//        User user1= new User("regadmin","password","password",role1)
+//        userRepository.save(user1);
         this.repository.save(new Employee("Joe Biden", 45));
         this.repository.save(new Employee("President Obama", 54));
         this.repository.save(new Employee("Crystal Mac", 34));

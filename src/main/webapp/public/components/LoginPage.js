@@ -24,7 +24,7 @@ export class LoginPage extends React.Component {
         return (
             <div>
    <form name='f' action='/login' method='POST'>
-    User:<input type='text' name='username' value=''/><br/>
+    User:<input type='text' name='username' /><br/>
        Password:<input type='password' name='password'/>
    <input name="submit" type="submit" value="Login"/>
 

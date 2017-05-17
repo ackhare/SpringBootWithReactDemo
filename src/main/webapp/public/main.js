@@ -17,7 +17,7 @@ class App extends React.Component {
         var self = this;
         var mode;
         $.ajax({
-            url: "http://localhost:8080/api/isLogin",
+            url: "http://localhost:8090/api/isLogin",
         }).then(function (data) {
             console.log("success in editing  in component did mount of users");
             console.log(data);

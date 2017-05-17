@@ -7,15 +7,21 @@ import org.springframework.data.rest.webmvc.RepositoryRestController
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
+
+//import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by chetan on 13/5/17.
  */
-@RepositoryRestController
+
+@RestController
+@RequestMapping("/api/isLogin")
 class RestApiController {
 //    //  private final ScannerRepository repository;
 //    @Autowired
@@ -23,12 +29,13 @@ class RestApiController {
 //
 //    private final Logger logger = LoggerFactory.getLogger(RestApiController.class);
 
-    @RequestMapping(method = RequestMethod.GET,value = "/isLogin/")
-    public @ResponseBody
-    ResponseEntity<?> isLogin() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
-        println authentication.name();
-        return ResponseEntity.ok(authentication.name());
+    @RequestMapping(method = RequestMethod.GET)
+    public def isLogin() {
+        println "zzzzzzzzzzzzzzzzzzzzzzzz"
+        UsernamePasswordAuthenticationToken authentication = SecurityContextHolder.getContext().getAuthentication();
+        println authentication?.principal;
+        return       authentication?.principal;
+
     }
 // @RequestMapping(method = RequestMethod.GET, value = "/api/employees/")
 //    public @ResponseBody ResponseEntity<?> getProducers() {

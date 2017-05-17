@@ -18,7 +18,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -29,26 +30,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
 		http
-		.authorizeRequests()
-			.antMatchers("/public/**","/resources/**").permitAll()
-			.anyRequest().authenticated()
-			.and()
-		.formLogin().loginProcessingUrl('/')
-			.defaultSuccessUrl("/", true)
-			.permitAll()
-			.and()
-		.httpBasic()
-			.and()
-		.csrf().disable()
-		.logout()
-			.logoutSuccessUrl("/");
+				.authorizeRequests()
+				.antMatchers("/css/**", "/index").permitAll()
+				.antMatchers("/user/**").hasRole("USER")
+				.and()
+				.formLogin().loginPage("/login").failureUrl("/login-error");
+//		.formLogin().loginProcessingUrl('/')
+//			.defaultSuccessUrl("/", true)
+//			.permitAll()
+//			.and()
+//		.httpBasic()
+//			.and()
+//		.csrf().disable()
+//		.logout()
+//				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutUrl("/customLogout").logoutSuccessUrl("/");
     }
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth
+			.inMemoryAuthentication()
+				.withUser("user").password("password").roles("USER");
+	}
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
+//    }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
-    }
 
 }

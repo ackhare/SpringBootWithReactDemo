@@ -68,7 +68,7 @@ dependencies {
    // compile('javax.servlet:jstl')
 //   compile("org.apache.tomcat.embed:tomcat-embed-jasper")
  compile("org.springframework.boot:spring-boot-starter-security")
-
+ compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE")
 //compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
     //compile group: 'com.h2database', name: 'h2', version: '1.4.195'
 }
