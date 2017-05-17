@@ -18,10 +18,9 @@ export class LogoutPage extends React.Component {
     render() {
         return (
 
-            <div>
-
-                <form action="/logout" method="post">
-                    <input type="submit" value="Logout" />
+            <div class="form-group">
+                <form action="/logout"  className="col-md-offset-12" method="post">
+                    <input  className="btn btn-danger" type="submit" value="Logout" />
                 </form>
             </div>
 

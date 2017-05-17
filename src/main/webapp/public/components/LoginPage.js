@@ -24,10 +24,12 @@ export class LoginPage extends React.Component {
         return (
                 <form action="/login" method="post">
                     <label >Username</label>:
-                    <input type="text" id="username" name="username"/> <br />
+                    <div className="form-group">
+                    <input type="text" id="username" name="username"/> </div>
                     <label >Password</label>:
-                    <input type="password" id="password" name="password" /> <br />
-                    <input type="submit" value="Log in" />
+                    <div className="form-group">
+                    <input type="password" id="password" name="password" /> </div>
+                    <input type="submit"  className="btn btn-default" value="Log in" />
                 </form>
 
         );
