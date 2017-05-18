@@ -80,7 +80,7 @@ export class LoginPage extends React.Component {
         else {
             return (
 
-                <div>
+                <div className="center_div">
                     <div className="label label-danger">{this.state.loginError}</div>
                     <div className="form-group">
                         <label >Username</label>:
