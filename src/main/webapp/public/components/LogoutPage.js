@@ -39,8 +39,8 @@ export class LogoutPage extends React.Component {
     render() {
         return (
 
-            <div className="form-group">
-                <form >
+            <div id="logout" className="form-group col-md-offset-11">
+                <form>
                     <button  className="btn btn-danger" onClick={this.logout} value="Logout" >LogOut</button>
                 </form>
             </div>

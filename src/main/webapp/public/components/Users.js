@@ -7,6 +7,8 @@ import ReactDOM from 'react-dom';
 import UsersList from './UsersList'
 import ShowAddButton from './ShowAddButton'
 import UserForm from './UserForm'
+import Header from './Header'
+
 
 export class Users extends React.Component {
     constructor() {
@@ -82,6 +84,7 @@ export class Users extends React.Component {
     render() {
         return (
             <div>
+
                 <UserForm displayed={this.state.formDisplayed} mode_current={'create'} onNewUser={this.onNewUser}/>
                 <UsersList displayed={this.state.formDisplayed} users={this.state.users}/>
                 <ShowAddButton displayed={this.state.formDisplayed} onToggleForm={this.onToggleForm}/>

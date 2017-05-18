@@ -1,9 +1,4 @@
-/**
- * Created by chetan on 16/5/17.
- */
-/**
- * Created by chetan on 8/5/17.
- */
+
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -12,6 +7,8 @@ import ShowAddButton from './ShowAddButton'
 import UserForm from './UserForm'
 import LogoutPage from './LogoutPage'
 import Users from './Users'
+import Header from './Header'
+
 export class LoginPage extends React.Component {
     constructor() {
         super();
@@ -19,7 +16,23 @@ export class LoginPage extends React.Component {
         this.login = this.login.bind(this);
 
     }
+    componentDidMount() {
+        var ref;
+        console.log("Inside component did mount of users ");
+        var self = this;
+        $.ajax({
+            url: "http://localhost:8080/api/isLogin",
+        }).then(function (data) {
+            console.log('login successfully');
+            self.setState({
+                isLogin: true,
+                authenticatedUser: data.username,
+                authorities: data.authorities[0].authority
+            });
 
+        });
+
+    }
     login() {
         var data = 'username=' + $('#username').val() + '&password=' + $('#password').val();
         var self = this;
@@ -57,20 +70,10 @@ export class LoginPage extends React.Component {
         if (this.state.isLogin) {
             return (
                 <div>
-                    <div className="col-md-12">
-                        <div className="col-md-6">
-
-
-                        </div>
-                        <div className="col-md-6  col-md-offset-10">
-                            <p className="label label-info">Welcome {this.state.authenticatedUser} with
-                                role {this.state.authorities}</p>
-                            <LogoutPage />
-                        </div>
-
-                    </div>
+                    <Header username={this.state.authenticatedUser}/>
                     <Users/>
                 </div>
+
             );
         }
 
