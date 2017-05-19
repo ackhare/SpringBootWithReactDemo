@@ -10,12 +10,41 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document
 
 public class User {
+    String getFirstName() {
+        return firstName
+    }
 
+    void setFirstName(String firstName) {
+        this.firstName = firstName
+    }
+
+    String getLastName() {
+        return lastName
+    }
+
+    void setLastName(String lastName) {
+        this.lastName = lastName
+    }
     @Id
     private String id;
     private String username;
+    private String firstName;
+    private String lastName;
     private String password;
     private String passwordConfirm;
+
+    User() {
+    }
+
+    String getEmail() {
+        return email
+
+    }
+
+    void setEmail(String email) {
+        this.email = email
+    }
+    private String email;
 
     Role getRole() {
         return role
@@ -26,7 +55,6 @@ public class User {
     }
     @DBRef
     private Role role;
-
 
     //@GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
@@ -62,6 +90,22 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
+    User(String username, String password, String passwordConfirm, String email,String firstName,String lastName,Role role) {
+        this.username = username
+        this.password = password
+        this.passwordConfirm = passwordConfirm
+        this.email = email
+        this.firstName=firstName
+        this.lastName=lastName
+        this.role = role
+    }
+    User(String username, String password, String passwordConfirm, String email,Role role) {
+        this.username = username
+        this.password = password
+        this.passwordConfirm = passwordConfirm
+        this.email = email
+        this.role = role
+    }
     User(String username, String password, String passwordConfirm, Role role) {
         this.username = username
         this.password = password

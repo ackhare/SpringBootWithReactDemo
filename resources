@@ -31,6 +31,7 @@ netstat -plntu
  for mongodb
 
  https://www.howtoforge.com/tutorial/install-mongodb-on-ubuntu-16.04/
+ http://stackoverflow.com/questions/40247556/spring-boot-automatic-json-to-object-at-controller
 
  show dbs
 
@@ -41,3 +42,4 @@ db.employee.find()
 
 db.user.remove({});
 http://stackoverflow.com/questions/25263176/many-to-many-in-mongodb-using-spring-configurationannotation-preffered
+https://www.javacodegeeks.com/2013/11/spring-data-mongodb-cascade-save-on-dbref-objects.html

@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import UsersList from './UsersList'
@@ -8,14 +6,17 @@ import UserForm from './UserForm'
 import LogoutPage from './LogoutPage'
 import Users from './Users'
 import Header from './Header'
+import SignUp from './SignUp'
 
 export class LoginPage extends React.Component {
     constructor() {
         super();
-        this.state = {isLogin: "", loginError: "", username: "", authenticatedUser: "", authorities: ""};
+        this.state = {isLogin: "", loginError: "", username: "", authenticatedUser: "", authorities: "",registrationMessage:""};
         this.login = this.login.bind(this);
+        this.signUpPage = this.signUpPage.bind(this);
 
     }
+
     componentDidMount() {
         var ref;
         console.log("Inside component did mount of users ");
@@ -32,6 +33,10 @@ export class LoginPage extends React.Component {
 
         });
 
+    }
+    signUpPage()
+    {
+        ReactDOM.render(<SignUp/>, document.getElementById('app'))
     }
     login() {
         var data = 'username=' + $('#username').val() + '&password=' + $('#password').val();
@@ -81,15 +86,17 @@ export class LoginPage extends React.Component {
             return (
 
                 <div className="center_div">
+            {this.props.registration_message}
                     <div className="label label-danger">{this.state.loginError}</div>
                     <div className="form-group">
                         <label >Username</label>:
                         <div className="form-group">
-                            <input type="text" id="username" name="username"/></div>
+                            <input className="form-control" type="text" id="username" name="username"/></div>
                         <label >Password</label>:
                         <div className="form-group">
-                            <input type="password" id="password" name="password"/></div>
+                            <input className="form-control" type="password" id="password" name="password"/></div>
                         <button onClick={this.login} className="btn btn-success">Log in</button>
+                        <button className="btn btn-green" onClick={this.signUpPage}>SignUp</button>
                     </div>
                 </div>
 
