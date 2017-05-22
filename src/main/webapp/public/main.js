@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom';
 import Users from './components/Users';
 import LoginPage from './components/LoginPage';
 import LogoutPage from './components/LogoutPage';
+import Formsy from 'formsy-react';
+//import Validation from 'react-validation';
 class App extends React.Component {
     constructor() {
         super();
-
-        // this.editUser = this.editUser.bind(this);
     }
 
 
@@ -23,11 +23,8 @@ class App extends React.Component {
     render() {
 
         return (
-            // <li className="list-group-item">
-            // <div>
 
             <LoginPage />
-            // </div>
         );
 
     }

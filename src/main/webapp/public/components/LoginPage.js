@@ -96,7 +96,7 @@ export class LoginPage extends React.Component {
                         <div className="form-group">
                             <input className="form-control" type="password" id="password" name="password"/></div>
                         <button onClick={this.login} className="btn btn-success">Log in</button>
-                        <button className="btn btn-green" onClick={this.signUpPage}>SignUp</button>
+                        <button className="btn btn-green col-md-offset-10-custom-login" onClick={this.signUpPage}>SignUp</button>
                     </div>
                 </div>
 
