@@ -7,14 +7,56 @@ import LogoutPage from './LogoutPage'
 import Users from './Users'
 import Header from './Header'
 import SignUp from './SignUp'
-
+import {Form} from 'formsy-react';
+import MyInput from './Input'
 export class LoginPage extends React.Component {
     constructor() {
         super();
-        this.state = {isLogin: "", loginError: "", username: "", authenticatedUser: "", authorities: "",registrationMessage:""};
+        this.state = {
+            isLogin: "",
+            loginError: "",
+            username: "",
+            authenticatedUser: "",
+            authorities: "",
+            registrationMessage: "",
+            canSubmit: false,
+            validationErrors: {}
+        };
         this.login = this.login.bind(this);
         this.signUpPage = this.signUpPage.bind(this);
+        this.enableButton = this.enableButton.bind(this);
+        this.disableButton = this.disableButton.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+    }
 
+    validateForm(values) {
+        if (!values.username) {
+            this.setState({
+                validationErrors: {
+                    username: 'Has no value'
+                }
+            });
+        } else {
+            this.setState({
+                validationErrors: {}
+            });
+        }
+    }
+
+    enableButton(values) {
+
+
+            this.setState({
+                canSubmit: true,
+                validationErrors: {}
+            });
+
+    }
+
+    disableButton() {
+        this.setState({
+            canSubmit: false
+        });
     }
 
     componentDidMount() {
@@ -34,10 +76,11 @@ export class LoginPage extends React.Component {
         });
 
     }
-    signUpPage()
-    {
+
+    signUpPage() {
         ReactDOM.render(<SignUp/>, document.getElementById('app'))
     }
+
     login() {
         var data = 'username=' + $('#username').val() + '&password=' + $('#password').val();
         var self = this;
@@ -85,20 +128,22 @@ export class LoginPage extends React.Component {
         else {
             return (
 
-                <div className="center_div">
-            {this.props.registration_message}
-                    <div className="label label-danger">{this.state.loginError}</div>
-                    <div className="form-group">
-                        <label >Username</label>:
-                        <div className="form-group">
-                            <input className="form-control" type="text" id="username" name="username"/></div>
-                        <label >Password</label>:
-                        <div className="form-group">
-                            <input className="form-control" type="password" id="password" name="password"/></div>
-                        <button onClick={this.login} className="btn btn-success">Log in</button>
-                        <button className="btn btn-green col-md-offset-10-custom-login" onClick={this.signUpPage}>SignUp</button>
-                    </div>
-                </div>
+                //     <div className="center_div">
+                // {this.props.registration_message}
+                //         <div className="label label-danger">{this.state.loginError}</div>
+                //         <div className="form-group">
+                <Form onSubmit={this.login} onChange={this.validateForm} onValid={this.enableButton}
+                      onInvalid={this.disableButton} validationErrors={this.state.validationErrors} className="login">
+
+
+                    <MyInput value="" type="text" required name="username"/>
+
+
+                    <MyInput value="" type="password" required name="password"/>
+                    <button type="submit" disabled={!this.state.canSubmit} className="btn btn-success">Log in</button>
+                    {/*<button className="btn btn-green" onClick={this.signUpPage}>SignUp</button>*/}
+
+                </Form>
 
             );
         }
