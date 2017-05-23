@@ -30,26 +30,21 @@ export class LoginPage extends React.Component {
     }
 
     validateForm(values) {
-        if (!values.username) {
-            this.setState({
-                validationErrors: {
-                    username: 'Has no value'
-                }
-            });
-        } else {
-            this.setState({
-                validationErrors: {}
-            });
-        }
+        console.log(values);
+
+        this.setState({
+            validationErrors: {}
+        });
+
     }
 
     enableButton(values) {
 
 
-            this.setState({
-                canSubmit: true,
-                validationErrors: {}
-            });
+        this.setState({
+            canSubmit: true,
+            validationErrors: {}
+        });
 
     }
 
@@ -78,7 +73,7 @@ export class LoginPage extends React.Component {
     }
 
     signUpPage() {
-        ReactDOM.render(<SignUp/>, document.getElementById('app'))
+        ReactDOM.render(<SignUp />, document.getElementById('app'))
     }
 
     login() {
@@ -128,22 +123,26 @@ export class LoginPage extends React.Component {
         else {
             return (
 
-                //     <div className="center_div">
-                // {this.props.registration_message}
-                //         <div className="label label-danger">{this.state.loginError}</div>
-                //         <div className="form-group">
-                <Form onSubmit={this.login} onChange={this.validateForm} onValid={this.enableButton}
-                      onInvalid={this.disableButton} validationErrors={this.state.validationErrors} className="login">
+                <div className="center_div">
+                    <h3 className="custom-title">Login to FinNews</h3>
+                    {this.props.registration_message}
+                    <div className="label label-danger custom-error">{this.state.loginError}</div>
+                    {/*//         <div className="form-group">*/}
+                    <Form onChange={this.validateForm} onValid={this.enableButton}
+                          onInvalid={this.disableButton} validationErrors={this.state.validationErrors}
+                         >
+                        <MyInput errorMessage="Username is required" value="" type="text" required title="Username"
+                                 id="username" name="username"/>
+                        <MyInput value="" type="password" errorMessage="Password is required" required title="Password"
+                                 id="password" name="password"/>
+                        <button type="submit" onClick={this.login} disabled={!this.state.canSubmit}
+                                className="btn btn-success">Log in
+                        </button>
+                        <button type="submit" className="btn btn-primary col-md-offset-8-custom-register-button"
+                                onClick={this.signUpPage}>SignUp
+                        </button>
 
-
-                    <MyInput value="" type="text" required name="username"/>
-
-
-                    <MyInput value="" type="password" required name="password"/>
-                    <button type="submit" disabled={!this.state.canSubmit} className="btn btn-success">Log in</button>
-                    {/*<button className="btn btn-green" onClick={this.signUpPage}>SignUp</button>*/}
-
-                </Form>
+                    </Form></div>
 
             );
         }

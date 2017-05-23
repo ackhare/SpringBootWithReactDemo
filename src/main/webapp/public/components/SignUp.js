@@ -8,13 +8,48 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Users from './Users';
 import LoginPage from './LoginPage';
+import {Form} from 'formsy-react';
+import MyInput from './Input'
 
 export class SignUp extends React.Component {
     constructor() {
         super();
-        this.state = {name: "", registration_sucess: false};
+        this.state = {name: "", registration_sucess: false, display: true, canSubmit: false, validationErrors: {}};
         this.register = this.register.bind(this);
+        this.cancel = this.cancel.bind(this);
+        this.enableButton = this.enableButton.bind(this);
+        this.disableButton = this.disableButton.bind(this);
+        // this.validateForm = this.validateForm.bind(this);
+    }
 
+    componentDidMount() {
+        console.log('mounted');
+    }
+
+    componentWillReceiveProps() {
+        console.log("run be");
+        this.setState({display: true, registration_sucess: false})
+    }
+
+    cancel() {
+        this.setState({display: false, registration_sucess: false})
+    }
+
+
+    enableButton(values) {
+
+
+        this.setState({
+            canSubmit: true,
+            validationErrors: {}
+        });
+
+    }
+
+    disableButton() {
+        this.setState({
+            canSubmit: false
+        });
     }
 
     register(e) {
@@ -52,38 +87,53 @@ export class SignUp extends React.Component {
     }
 
     render() {
+        console.log(this.state);
         if (this.state.registration_sucess) {
-return (
-            <LoginPage registration_message={this.state.name+" has been successfully registred"}/>
-)
+            return (
+                <LoginPage registration_message={this.state.name + " has been successfully registred"}/>
+            )
         }
+        else if (!this.state.display) {
+            return (
+                <LoginPage />
+            )
+
+        }
+
+
         else {
             return (
                 <div className="center_div">
-                    {/*<div className="label label-danger">{this.state.signUpError}</div>*/}
-                    <div className="form-group">
-                        <label >Username</label>:
-                        <div className="form-group">
-                            <input type="text" id="username" className="form-control" name="username"/></div>
-                        <label >Password</label>:
-                        <div className="form-group">
-                            <input type="password" id="password" className="form-control" name="password"/></div>
-                        <label >Password Confirm</label>:
-                        <div className="form-group">
-                            <input type="password" id="confirmPassword" className="form-control"
-                                   name="confirmPassword"/></div>
-                        <label >Email</label>:
-                        <div className="form-group">
-                            <input id="email" className="form-control" name="email"/></div>
-                        <label >First Name</label>:
-                        <div className="form-group">
-                            <input id="fname" className="form-control" name="firstName"/></div>
-                        <label >Last Name</label>:
-                        <div className="form-group">
-                            <input id="lname" className="form-control" name="lastName"/></div>
-                        <button onClick={this.register} className="btn btn-success">Sign up</button>
-                    </div>
-                </div>
+                    <h3 className="custom-title">Register to FinNews</h3>
+                    <Form onValid={this.enableButton}
+                          onInvalid={this.disableButton} validationErrors={this.state.validationErrors}
+                     >
+                        <MyInput value="" type="text" errorMessage="Username is required" required title="Username"
+                                 id="username" name="username"/>
+
+                        <MyInput value="" type="text" required errorMessage="Password is required" title="Password"
+                                 id="password" name="password"/>
+
+                        <MyInput value="" type="text" required title="Confirm Password"
+                                 errorMessage="Confirm Password is required" id="confirmPassword"
+                                 name="confirmPassword"/>
+
+                        <MyInput value="" type="text" validations="isEmail" validationError="This is not a valid email" required  title="Email" id="email"
+                                 name="email"/>
+
+                        <MyInput value="" type="text" required title="First Name" errorMessage="FirstName is required"
+                                 id="fname"
+                                 name="confirmPassword"/>
+
+                        <MyInput value="" type="text" required title="Last Name" id="lname"
+                                 errorMessage="LastName is required" name="lastName"/>
+                        <button type="submit" disabled={!this.state.canSubmit} onClick={this.register}
+                                className="btn btn-success">Sign up
+                        </button>
+                        <button type="submit" onClick={this.cancel} className="btn btn-danger col-md-offset-8-custom-register-button">Cancel
+                        </button>
+
+                    </Form></div>
             );
         }
     }

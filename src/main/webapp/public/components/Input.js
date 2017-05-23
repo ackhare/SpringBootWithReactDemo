@@ -29,13 +29,15 @@ const MyInput = React.createClass({
       <div className={className}>
         <label htmlFor={this.props.name}>{this.props.title}</label>
         <input
+           id={this.props.id}
+           className="form-control"
           type={this.props.type || 'text'}
           name={this.props.name}
           onChange={this.changeValue}
           value={this.getValue()}
           checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
         />
-        <span className='validation-error'>{errorMessage}</span>
+        <span className='validation-error'>{this.showRequired() ? this.props.errorMessage : ""}</span>
       </div>
     );
   }
