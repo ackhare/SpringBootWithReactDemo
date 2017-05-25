@@ -1,9 +1,11 @@
-package com.springReact.service
+package com.springReact.service.dao
 
+import com.mongodb.DuplicateKeyException
 import com.springReact.model.User
 import com.springReact.repository.RoleRepository
 import com.springReact.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -22,8 +24,9 @@ class UserDao {
         try {
             userRepository.save(user);
         }
-        catch (Exception e) {
-            println e
+        catch (DuplicateKeyException e) {
+//            println 'exception'
+//            println e.dump()
         }
     }
 

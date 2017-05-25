@@ -106,20 +106,22 @@ export class SignUp extends React.Component {
                     <h3 className="custom-title">Register to FinNews</h3>
                     <Form onValid={this.enableButton}
                           onInvalid={this.disableButton} validationErrors={this.state.validationErrors}
-                     >
+                    >
                         <MyInput value="" type="text" errorMessage="Username is required" required title="Username"
                                  id="username" name="username"/>
 
-                        <MyInput value="" type="text" required errorMessage="Password is required" title="Password"
+                        <MyInput value="" type="text"
+                                 title="Password"
                                  id="password" name="password"/>
 
-                        <MyInput value="" type="text"  title="Confirm Password"
-                              id="confirmPassword"
+                        <MyInput value="" type="text" title="Confirm Password"
+                                 id="confirmPassword"
                                  errorMessage="confirm password should match with password"
                                  validations="equalsField:password"
                                  name="confirmPassword"/>
 
-                        <MyInput value="" type="text" validations="isEmail" errorMessage="This is not a valid email" required  title="Email" id="email"
+                        <MyInput value="" type="text" validations="isEmail" errorMessage="This is not a valid email"
+                                 required title="Email" id="email"
                                  name="email"/>
 
                         <MyInput value="" type="text" required title="First Name" errorMessage="FirstName is required"
@@ -131,7 +133,8 @@ export class SignUp extends React.Component {
                         <button type="submit" disabled={!this.state.canSubmit} onClick={this.register}
                                 className="btn btn-success">Sign up
                         </button>
-                        <button type="submit" onClick={this.cancel} className="btn btn-danger col-md-offset-8-custom-register-button">Cancel
+                        <button type="submit" onClick={this.cancel}
+                                className="btn btn-danger col-md-offset-8-custom-register-button">Cancel
                         </button>
 
                     </Form></div>

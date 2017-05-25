@@ -45,7 +45,16 @@ http://stackoverflow.com/questions/25263176/many-to-many-in-mongodb-using-spring
 https://www.javacodegeeks.com/2013/11/spring-data-mongodb-cascade-save-on-dbref-objects.html
 
 
-
+https://stackoverflow.com/questions/19605150/regex-for-password-must-be-contain-at-least-8-characters-least-1-number-and-bot
 
 http://www.baeldung.com/spring-data-rest-validators
 https://www.petrikainulainen.net/programming/spring-framework/spring-from-the-trenches-adding-validation-to-a-rest-api/
+http://jonathan-whywecanthavenicethings.blogspot.in/2011/11/wheres-my-exceptions-spring-data.html
+map.each{ k, v -> println "${k}:${v}" }
+println object.properties.collect{it}.join('\n')
+
+println object.properties
+.sort{it.key}
+.collect{it}
+.findAll{!filtered.contains(it.key)}
+.join('\n')

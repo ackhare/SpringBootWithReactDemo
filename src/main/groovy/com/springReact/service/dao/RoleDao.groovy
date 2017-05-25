@@ -1,4 +1,4 @@
-package com.springReact.service
+package com.springReact.service.dao
 
 import com.springReact.model.Role
 import com.springReact.repository.RoleRepository
@@ -17,6 +17,9 @@ class RoleDao {
 
       @Transactional
     public Role saveUser(String rolesd) {
-          roleRepository.save(employee);
+          //roleRepository.save(employee);
+    }
+    public Role findRole(String roles) {
+        //roleRepository.save(employee);
     }
 }

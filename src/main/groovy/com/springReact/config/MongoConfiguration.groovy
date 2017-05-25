@@ -1,6 +1,7 @@
 package com.springReact.config
 
 import com.mongodb.Mongo
+import com.mongodb.WriteConcern
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.authentication.UserCredentials
@@ -20,6 +21,7 @@ public class MongoConfiguration {
   }
 
   public @Bean MongoTemplate mongoTemplate() throws Exception {
+    mongoDbFactory().db.writeConcern=WriteConcern.SAFE
     return new MongoTemplate(mongoDbFactory());
   }
 }

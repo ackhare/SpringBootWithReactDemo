@@ -3,23 +3,16 @@ package com.springReact.controller
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ObjectNode
-import com.springReact.Enums.Roles
 import com.springReact.ModelConfig
 import com.springReact.model.Role
 import com.springReact.model.User
-import com.springReact.repository.EmployeeRepository
 import com.springReact.repository.RoleRepository
 import com.springReact.repository.UserRepository
-import com.springReact.service.UserDao
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication
+import com.springReact.service.dao.UserDao
+import groovyjarjarantlr.StringUtils
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.rest.webmvc.RepositoryRestController
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory
-import org.springframework.http.ResponseEntity
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.dao.DuplicateKeyException
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
 
 //import org.springframework.security.core.context.SecurityContextHolder
@@ -73,6 +66,7 @@ class RestApiController {
             String firstName = user.firstName
             String lastName = user.lastName
             // Role role= new Role('role_user');
+
             Role role = roleRepository.findByName('user_role')
             User new_user = new User(username, password, confirm_password, email, firstName, lastName, role);
             new_user = userDao.saveUser(new_user)
@@ -86,10 +80,13 @@ class RestApiController {
             System.out.println(jsonString);
             return jsonString;
         }
-        catch(Exception e)
+        catch(DuplicateKeyException e)
         {
-            println e.cause
-            println e.stackTrace
+            println 'exception in rest api '
+            println e.cause.properties.errorMessage.split('index:').last().split().last();
+            //println e.mostSpecificCause.dump()
+
+           // println e.stackTrace
         }
 
     }
