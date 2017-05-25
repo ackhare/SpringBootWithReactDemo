@@ -43,3 +43,9 @@ db.employee.find()
 db.user.remove({});
 http://stackoverflow.com/questions/25263176/many-to-many-in-mongodb-using-spring-configurationannotation-preffered
 https://www.javacodegeeks.com/2013/11/spring-data-mongodb-cascade-save-on-dbref-objects.html
+
+
+
+
+http://www.baeldung.com/spring-data-rest-validators
+https://www.petrikainulainen.net/programming/spring-framework/spring-from-the-trenches-adding-validation-to-a-rest-api/

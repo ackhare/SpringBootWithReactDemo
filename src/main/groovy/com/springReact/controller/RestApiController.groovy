@@ -10,6 +10,7 @@ import com.springReact.model.User
 import com.springReact.repository.EmployeeRepository
 import com.springReact.repository.RoleRepository
 import com.springReact.repository.UserRepository
+import com.springReact.service.UserDao
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.rest.webmvc.RepositoryRestController
@@ -42,6 +43,9 @@ class RestApiController {
     @Autowired
     RoleRepository roleRepository
 
+    @Autowired
+    UserDao userDao
+
 //
 //    private final Logger logger = LoggerFactory.getLogger(RestApiController.class);
 
@@ -60,53 +64,34 @@ class RestApiController {
     @RequestMapping(method = RequestMethod.POST, value = "register")
     public @ResponseBody
     def register(@RequestBody User user) {
-        ObjectMapper mapper = new ObjectMapper();
-        String username = user.username;
-        String password = user.password;
-        String confirm_password = user.passwordConfirm;
-        String email = user.email
-        String firstName = user.firstName
-        String lastName = user.lastName
-        // Role role= new Role('role_user');
-        Role role = roleRepository.findByName('user_role')
-        User new_user = new User(username, password, confirm_password, email, firstName, lastName, role);
-        new_user = userRepository.save(new_user);
-        JsonNode rootNode = mapper.createObjectNode();
-        JsonNode childNode1 = mapper.createObjectNode();
-        ((ObjectNode) childNode1).put("name", "${new_user.firstName + " " + new_user.lastName}");
-        ((ObjectNode) rootNode).set("obj1", childNode1);
-        String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
-        System.out.println(jsonString);
-        return jsonString;
-
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            String username = user.username;
+            String password = user.password;
+            String confirm_password = user.passwordConfirm;
+            String email = user.email
+            String firstName = user.firstName
+            String lastName = user.lastName
+            // Role role= new Role('role_user');
+            Role role = roleRepository.findByName('user_role')
+            User new_user = new User(username, password, confirm_password, email, firstName, lastName, role);
+            new_user = userDao.saveUser(new_user)
+            println "new_user"
+            println new_user
+            JsonNode rootNode = mapper.createObjectNode();
+            JsonNode childNode1 = mapper.createObjectNode();
+            ((ObjectNode) childNode1).put("name", "${new_user.firstName + " " + new_user.lastName}");
+            ((ObjectNode) rootNode).set("obj1", childNode1);
+            String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
+            System.out.println(jsonString);
+            return jsonString;
+        }
+        catch(Exception e)
+        {
+            println e.cause
+            println e.stackTrace
+        }
 
     }
-// @RequestMapping(method = RequestMethod.GET, value = "/api/employees/")
-//    public @ResponseBody ResponseEntity<?> getProducers() {
-// List<String> producers = repository.listProducers();
-
-//
-// do some intermediate processing, logging, etc. with the producers
-//
-
-//        Resources<String> resources = new Resources<String>(producers);
-//
-//        resources.add(linkTo(methodOn(ScannerController.class).getProducers()).withSelfRel());
-
-// add other links as needed
-
-//        return ResponseEntity.ok();
-//    }
-
-//    @RequestMapping(value = "/employees/{id}", method = RequestMethod.DELETE)
-//    public void  delete(@PathVariable BigInteger id) {
-//
-//        println "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
-//println id;
-//         println repository.findOne(id)
-//
-//        logger.info("nknkkknknkkkkkn");
-////        return  ResponseEntity.ok("mmmmm") ;
-//    }
 
 }

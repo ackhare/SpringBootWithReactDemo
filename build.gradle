@@ -51,6 +51,7 @@ configurations {
     providedRuntime
 }
 dependencies {
+    compile group: 'org.springframework', name: 'springloaded', version: '1.2.7.RELEASE'
     compile('org.springframework.boot:spring-boot-starter-data-mongodb')
     compile "org.springframework.boot:spring-boot-starter-thymeleaf:+"
 //    compile "org.springframework.boot:spring-boot-starter-data-jpa:+"

@@ -23,8 +23,7 @@ const MyInput = React.createClass({
 
     // An error message is returned ONLY if the component is invalid
     // or the server has returned an error message
-    const errorMessage = this.getErrorMessage();
-
+    const errorMessage = this.props.validations ? (this.showError() ? this.props.errorMessage : '') :  (this.showRequired() ? this.props.errorMessage : "");
     return (
       <div className={className}>
         <label htmlFor={this.props.name}>{this.props.title}</label>
@@ -37,7 +36,7 @@ const MyInput = React.createClass({
           value={this.getValue()}
           checked={this.props.type === 'checkbox' && this.getValue() ? 'checked' : null}
         />
-        <span className='validation-error'>{this.showRequired() ? this.props.errorMessage : ""}</span>
+        <span className='validation-error'>{errorMessage}</span>
       </div>
     );
   }

@@ -1,9 +1,9 @@
 package com.springReact.config
 
-import com.springReact.service.HttpLogoutSuccessHandler
-import com.springReact.service.RESTAuthenticationEntryPoint
-import com.springReact.service.RESTAuthenticationFailureHandler
-import com.springReact.service.RESTAuthenticationSuccessHandler
+import com.springReact.service.securityHandlers.HttpLogoutSuccessHandler
+import com.springReact.service.securityHandlers.RESTAuthenticationEntryPoint
+import com.springReact.service.securityHandlers.RESTAuthenticationFailureHandler
+import com.springReact.service.securityHandlers.RESTAuthenticationSuccessHandler
 import com.springReact.service.UserDetailsServiceImpl
 
 ////package com.springReact
@@ -12,18 +12,13 @@ import com.springReact.service.UserDetailsServiceImpl
 //// * Created by chetan on 15/5/17.
 //// */
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.security.SecurityProperties
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.password.NoOpPasswordEncoder
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 

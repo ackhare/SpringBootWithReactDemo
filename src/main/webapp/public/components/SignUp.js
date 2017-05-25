@@ -19,7 +19,6 @@ export class SignUp extends React.Component {
         this.cancel = this.cancel.bind(this);
         this.enableButton = this.enableButton.bind(this);
         this.disableButton = this.disableButton.bind(this);
-        // this.validateForm = this.validateForm.bind(this);
     }
 
     componentDidMount() {
@@ -114,11 +113,13 @@ export class SignUp extends React.Component {
                         <MyInput value="" type="text" required errorMessage="Password is required" title="Password"
                                  id="password" name="password"/>
 
-                        <MyInput value="" type="text" required title="Confirm Password"
-                                 errorMessage="Confirm Password is required" id="confirmPassword"
+                        <MyInput value="" type="text"  title="Confirm Password"
+                              id="confirmPassword"
+                                 errorMessage="confirm password should match with password"
+                                 validations="equalsField:password"
                                  name="confirmPassword"/>
 
-                        <MyInput value="" type="text" validations="isEmail" validationError="This is not a valid email" required  title="Email" id="email"
+                        <MyInput value="" type="text" validations="isEmail" errorMessage="This is not a valid email" required  title="Email" id="email"
                                  name="email"/>
 
                         <MyInput value="" type="text" required title="First Name" errorMessage="FirstName is required"
