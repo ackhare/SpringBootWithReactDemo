@@ -119,15 +119,17 @@ export class SignUp extends React.Component {
                         <MyInput value="" type="text" errorMessage="Username is required" required title="Username"
                                  id="username" name="username"/>
 
-                        <MyInput value="" type="text"
+                        <MyInput value="" type="password"
                                  title="Password"
+                                 required
                                  validations={{
                                      matchRegexp: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
                                  }}
                                  errorMessage="Password must be Minimum 8 characters with at least 1 Alphabet and 1 Number: "
                                  id="password" name="password"/>
 
-                        <MyInput value="" type="text" title="Confirm Password"
+                        <MyInput value="" type="password" title="Confirm Password"
+                                 required
                                  id="confirmPassword"
                                  errorMessage="confirm password should match with password"
                                  validations="equalsField:password"
