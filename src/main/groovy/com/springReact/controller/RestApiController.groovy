@@ -57,36 +57,40 @@ class RestApiController {
     @RequestMapping(method = RequestMethod.POST, value = "register")
     public @ResponseBody
     def register(@RequestBody User user) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            String username = user.username;
-            String password = user.password;
-            String confirm_password = user.passwordConfirm;
-            String email = user.email
-            String firstName = user.firstName
-            String lastName = user.lastName
-            // Role role= new Role('role_user');
 
+        ObjectMapper mapper = new ObjectMapper();
+        String username = user.username;
+        String password = user.password;
+        String confirm_password = user.passwordConfirm;
+        String email = user.email
+        String firstName = user.firstName
+        String lastName = user.lastName
+        // Role role= new Role('role_user');
+        JsonNode rootNode = mapper.createObjectNode();
+        JsonNode childNode1 = mapper.createObjectNode();
+
+
+        try {
             Role role = roleRepository.findByName('user_role')
             User new_user = new User(username, password, confirm_password, email, firstName, lastName, role);
             new_user = userDao.saveUser(new_user)
-            println "new_user"
-            println new_user
-            JsonNode rootNode = mapper.createObjectNode();
-            JsonNode childNode1 = mapper.createObjectNode();
             ((ObjectNode) childNode1).put("name", "${new_user.firstName + " " + new_user.lastName}");
             ((ObjectNode) rootNode).set("obj1", childNode1);
             String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
             System.out.println(jsonString);
             return jsonString;
         }
-        catch(DuplicateKeyException e)
-        {
+        catch (DuplicateKeyException e) {
             println 'exception in rest api '
+            println e.cause.properties.errorMessage.split('index:').last().split().first();
+            ((ObjectNode) childNode1).put("error", "The " +e.cause.properties.errorMessage.split('index:').last().split().first()+ " is already taken")
+            ((ObjectNode) rootNode).set("obj1", childNode1);
             println e.cause.properties.errorMessage.split('index:').last().split().last();
+            //((ObjectNode) rootNode).set("obj1", childNode1);
+            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode);
             //println e.mostSpecificCause.dump()
 
-           // println e.stackTrace
+            // println e.stackTrace
         }
 
     }

@@ -14,7 +14,7 @@ import MyInput from './Input'
 export class SignUp extends React.Component {
     constructor() {
         super();
-        this.state = {name: "", registration_sucess: false, display: true, canSubmit: false, validationErrors: {}};
+        this.state = {name: "", registration_sucess: false, display: true, canSubmit: false, validationErrors: {},serverSideError:""};
         this.register = this.register.bind(this);
         this.cancel = this.cancel.bind(this);
         this.enableButton = this.enableButton.bind(this);
@@ -70,15 +70,23 @@ export class SignUp extends React.Component {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
-                console.log();
-                self.setState({registration_sucess: true, name: data.obj1.name});
-
+                console.log('succ');
+                console.log(data);
+                if(data.obj1.name) {
+                    self.setState({registration_sucess: true, name: data.obj1.name});
+                }
+                else if(data.obj1.error){
+                    self.setState({registration_sucess: false, serverSideError: data.obj1.error,display:false});
+                    $('html, body').animate({scrollTop: '0px'}, 300);
+                }
                 console.log("good on save");
             },
-            error: function () {
+            error: function (xhr, error) {
+
                 self.setState({registration_sucess: true, name: ""});
                 console.log("error on save");
-
+                console.log(xhr);
+                console.log(error);
             }
 
         });
@@ -92,7 +100,7 @@ export class SignUp extends React.Component {
                 <LoginPage registration_message={this.state.name + " has been successfully registred"}/>
             )
         }
-        else if (!this.state.display) {
+        else if (!this.state.display && !this.state.serverSideError) {
             return (
                 <LoginPage />
             )
@@ -104,6 +112,7 @@ export class SignUp extends React.Component {
             return (
                 <div className="center_div">
                     <h3 className="custom-title">Register to FinNews</h3>
+                    <div className="label label-danger custom-error">{this.state.serverSideError}</div>
                     <Form onValid={this.enableButton}
                           onInvalid={this.disableButton} validationErrors={this.state.validationErrors}
                     >
@@ -112,6 +121,10 @@ export class SignUp extends React.Component {
 
                         <MyInput value="" type="text"
                                  title="Password"
+                                 validations={{
+                                     matchRegexp: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+                                 }}
+                                 errorMessage="Password must be Minimum 8 characters with at least 1 Alphabet and 1 Number: "
                                  id="password" name="password"/>
 
                         <MyInput value="" type="text" title="Confirm Password"
