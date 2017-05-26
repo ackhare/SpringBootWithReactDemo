@@ -148,6 +148,7 @@ export class SignUp extends React.Component {
                         <button type="submit" disabled={!this.state.canSubmit} onClick={this.register}
                                 className="btn btn-success">Sign up
                         </button>
+
                         <button type="submit" onClick={this.cancel}
                                 className="btn btn-danger col-md-offset-8-custom-register-button">Cancel
                         </button>
