@@ -12,7 +12,7 @@ import com.springReact.service.dao.UserDao
 import groovyjarjarantlr.StringUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DuplicateKeyException
-import org.springframework.security.core.context.SecurityContextHolder
+
 import org.springframework.web.bind.annotation.RequestBody
 
 //import org.springframework.security.core.context.SecurityContextHolder

@@ -4,10 +4,6 @@ import com.springReact.repository.EmployeeRepository
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
-import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.RequestMapping
@@ -57,7 +53,10 @@ class HomeController {
         return "index";
     }
 
-
+//    @RequestMapping("/index")
+//    public String root1() {
+//        return "index";
+//    }
 //    @RequestMapping("/user/index")
 //    public String userIndex() {
 //        return "user/index";
